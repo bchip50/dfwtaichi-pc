@@ -40,9 +40,7 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres:///dfwtaichi")
-}
+DATABASES = {"default": env.db("DATABASE_URL", default="postgres:///dfwtaichi")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # URLS
@@ -77,6 +75,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "dfwtaichi.users.apps.UsersConfig",
     "dfwtaichi.styles.apps.StylesConfig",
+    "dfwtaichi.locations.apps.LocationsConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -270,6 +269,6 @@ SOCIALACCOUNT_ADAPTER = "dfwtaichi.users.adapters.SocialAccountAdapter"
 
 
 # Your stuff...
-GOOGLE_MAPS_API_KEY = 'AIzaSyB_hPVMPRH6QJ5kqicijFyl_K7ByKrpbug'
+GOOGLE_MAPS_API_KEY = "AIzaSyBLDpTM3c50sCj3Pw4Yo7Giju-adzTBbbE"
 
 # ------------------------------------------------------------------------------

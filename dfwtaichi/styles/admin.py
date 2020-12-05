@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from dfwtaichi.styles.models import Style
+
+
+@admin.register(Style)
+class StylesAdmin(admin.ModelAdmin):
+    list_display = [
+        "title",
+        "slug",
+    ]

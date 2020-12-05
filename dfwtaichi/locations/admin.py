@@ -1,19 +1,23 @@
 from django.contrib import admin
 
-from django_google_maps import widgets as map_widgets
-from django_google_maps import fields as map_fields
+from django_google_maps.widgets import GoogleMapsAddressWidget
+from django_google_maps.fields import AddressField, GeoLocationField
+from django.forms.widgets import TextInput
 
 # Register your models here.
+from dfwtaichi.locations.models import Location
+
+
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    list_display = ['title', 'address1', 'address2', 'city', 'state', 'zipcode',
-                    'contact', 'contact-email', 'contact-phone',]
+    list_display = [
+        "title",
+        "city",
+        "contact",
+        "contact_email",
+        "contact_phone",
+    ]
     formfield_overrides = {
-        map_fields.AddressField: {'widget':
-                                      map_widgets.GoogleMapsAddressWidget(attrs={
-                                          'data-autocomplete-options': json.dumps({
-                                              'types': ['geocode', 'establishment'],
-                                              'componentRestrictions': {'country': 'us'}
-                                          })
-                                      })},
+        AddressField: {"widget": GoogleMapsAddressWidget},
+        GeoLocationField: {"widget": TextInput},
     }
