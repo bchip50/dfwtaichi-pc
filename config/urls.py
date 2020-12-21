@@ -6,7 +6,6 @@ from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
@@ -15,7 +14,11 @@ urlpatterns = [
     # User management
     path("users/", include("dfwtaichi.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
+    # Your stuff: custom urls includes go here,
+    path("styles/", include("dfwtaichi.styles.urls", namespace="styles")),
+    #   path("locations/", include("dfwtaichi.locations.urls", namespace="locations")),
+    # This one must go last
+    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

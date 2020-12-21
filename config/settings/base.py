@@ -182,6 +182,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
+                "dfwtaichi.styles.context_processors.style_menu",
                 "dfwtaichi.utils.context_processors.settings_context",
             ],
         },
@@ -270,5 +271,4 @@ SOCIALACCOUNT_ADAPTER = "dfwtaichi.users.adapters.SocialAccountAdapter"
 
 # Your stuff...
 GOOGLE_MAPS_API_KEY = "AIzaSyBLDpTM3c50sCj3Pw4Yo7Giju-adzTBbbE"
-
 # ------------------------------------------------------------------------------

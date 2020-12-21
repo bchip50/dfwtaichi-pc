@@ -25,6 +25,9 @@
       {% if object.bio %}
         <p>{{ object.bio }}</p>
       {% endif %}
+      {% if object.sponsor %}
+        <p>User is a leader according to {{ object.sponsor.name }}</p>
+      {% endif %}
     </div>
   </div>
 
