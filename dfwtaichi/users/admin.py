@@ -15,8 +15,19 @@ class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
         (
             "User",
-            {"fields": ("name", "gmail", "phone", "cell", "leaderFlag", "sponsor")},
+            {
+                "fields": (
+                    "name",
+                    "gmail",
+                    "phone",
+                    "cell",
+                    "favorite_style",
+                    "city",
+                    "leaderFlag",
+                    "sponsor",
+                )
+            },
         ),
     ) + tuple(auth_admin.UserAdmin.fieldsets)
-    list_display = ["username", "name", "is_superuser"]
+    list_display = ["username", "name", "leaderFlag"]
     search_fields = ["name"]

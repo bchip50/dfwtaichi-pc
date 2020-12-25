@@ -271,4 +271,5 @@ SOCIALACCOUNT_ADAPTER = "dfwtaichi.users.adapters.SocialAccountAdapter"
 
 # Your stuff...
 GOOGLE_MAPS_API_KEY = "AIzaSyBLDpTM3c50sCj3Pw4Yo7Giju-adzTBbbE"
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
 # ------------------------------------------------------------------------------

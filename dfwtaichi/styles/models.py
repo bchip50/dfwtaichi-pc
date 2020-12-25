@@ -27,7 +27,7 @@ class Style(LifecycleModelMixin, TimeStampedModel):
         verbose_name="Style address", unique=True, default="Auto-generated"
     )
     description = models.TextField(verbose_name="Description", blank=True)
-    wikipedia = models.URLField(verbose_name="Wikipedia page.", blank=True)
+    wikipedia = models.URLField(verbose_name="Reference page.", blank=True)
     # coverphotos = models.ManyToManyField(to="resource.Resource", on_delete=models.CASCADE)
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL
@@ -125,6 +125,10 @@ class Series(LifecycleModelMixin, TimeStampedModel):
         through_fields=("series", "member"),
     )
 
+    class Meta:
+        verbose_name = "series"
+        verbose_name_plural = "series"
+
     def __str__(self):
         return f"{self.style.title}: {self.title}"
 
@@ -174,3 +178,7 @@ class Meeting(LifecycleModelMixin, TimeStampedModel):
 
     def __str__(self):
         return f"{self.meeting.series.title} on {self.meeting.day:%m/%d/%Y} leader:{self.leader.name}"
+
+    class Meta:
+        verbose_name = "meeting"
+        verbose_name_plural = "meetings"
