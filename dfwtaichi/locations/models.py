@@ -1,6 +1,6 @@
 from django.db import models
-from phone_field import PhoneField
 from django_google_maps import fields as map_fields
+from phone_field import PhoneField
 
 
 class LocContact(models.Model):

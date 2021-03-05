@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from dfwtaichi.styles.models import Style, Series, Meeting
-from dfwtaichi.resources.models import Resource
 from dfwtaichi.locations.models import Location
+from dfwtaichi.resources.models import Resource
+from dfwtaichi.styles.models import Meeting, Series, Style
 
 """
 from dfwtaichi.styles.forms import (

@@ -1,12 +1,8 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from django_lifecycle import (
-    LifecycleModelMixin,
-    hook,
-    BEFORE_SAVE,
-)
+from django_lifecycle import BEFORE_SAVE, LifecycleModelMixin, hook
 from model_utils.models import TimeStampedModel
 
 

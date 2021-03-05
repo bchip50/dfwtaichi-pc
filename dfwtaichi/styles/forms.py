@@ -1,9 +1,9 @@
 from django import forms
 from django.conf import settings
+
 from dfwtaichi.users.models import User
-from .models import (
-    Series,
-)
+
+from .models import Series
 
 """
 class SeriesMembersChangeListForm(forms.ModelForm):

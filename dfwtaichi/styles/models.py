@@ -1,15 +1,11 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from django_lifecycle import (
-    LifecycleModelMixin,
-    hook,
-    BEFORE_SAVE,
-)
-
+from django_lifecycle import BEFORE_SAVE, LifecycleModelMixin, hook
 from model_utils.models import TimeStampedModel
 from taggit.managers import TaggableManager
+
 from dfwtaichi.resources.models import Resource
 
 
@@ -36,10 +32,10 @@ class Style(LifecycleModelMixin, TimeStampedModel):
         verbose_name = "style"
         verbose_name_plural = "styles"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse("styles.views.detail", kwargs={"slug": self.slug})
 
     @hook(BEFORE_SAVE, when="title", has_changed=True)
@@ -56,7 +52,7 @@ class SeriesLeaders(models.Model):
     active = models.BooleanField(default=True)
     since = models.DateField(auto_now_add=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.series.title}:{self.leader.name}"
 
 
@@ -68,7 +64,7 @@ class SeriesMembers(models.Model):
     paid_through = models.DateField("Paid up through", null=True)
     since = models.DateField(auto_now_add=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.series.title}:{self.member.name}"
 
 
@@ -133,7 +129,7 @@ class Series(LifecycleModelMixin, TimeStampedModel):
         verbose_name = "series"
         verbose_name_plural = "series"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.style.title}: {self.title}"
 
     @hook(BEFORE_SAVE, when="title", has_changed=True)
@@ -148,7 +144,7 @@ class MeetingAttendees(models.Model):
     meeting = models.ForeignKey(to="Meeting", on_delete=models.CASCADE)
     present = models.BooleanField(default=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.meeting.series.title} on {self.meeting.day:%m/%d/%Y}, {self.member.name}"
 
 
@@ -180,7 +176,7 @@ class Meeting(LifecycleModelMixin, TimeStampedModel):
         through_fields=("meeting", "attendee"),
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.series.title} on {self.day:%m/%d/%Y} leader:{self.leader.name}"
 
     class Meta:

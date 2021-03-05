@@ -1,6 +1,6 @@
 from django.shortcuts import render
+from django.views.generic import DetailView, ListView
 
-from django.views.generic import ListView, DetailView
 from .models import Style
 
 
