@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from phone_field import PhoneField
 from dfwtaichi.styles.models import Style
+from dfwtaichi.resources.models import Resource
 
 
 class User(AbstractUser):
@@ -22,6 +23,7 @@ class User(AbstractUser):
         "cell phone", blank=True, help_text="Number used for text notifications"
     )
     bio = models.TextField("TaiChi biography.", blank=True)
+    resources = models.ManyToManyField(to=Resource)
     favorite_style = models.ForeignKey(
         to=Style,
         on_delete=models.SET_NULL,
@@ -41,6 +43,7 @@ class User(AbstractUser):
         "self",
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
         help_text="User who applied leader designation.",
     )
 

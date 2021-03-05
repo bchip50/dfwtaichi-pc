@@ -17,3 +17,5 @@ django-redis==4.12.1  # https://github.com/jazzband/django-redis
 django-lifecycle==0.8.0 # https://github.com/rsinger86/django-lifecycle
 django-phone-field==1.8.1
 django-google-maps==0.12.2
+django-taggit==1.3.0
+django-taggit-templatetags2==1.6.1

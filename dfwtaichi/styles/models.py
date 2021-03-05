@@ -5,14 +5,12 @@ from django.utils.text import slugify
 from django_lifecycle import (
     LifecycleModelMixin,
     hook,
-    BEFORE_UPDATE,
-    AFTER_UPDATE,
     BEFORE_SAVE,
 )
 
 from model_utils.models import TimeStampedModel
-
-# Create your models here.
+from taggit.managers import TaggableManager
+from dfwtaichi.resources.models import Resource
 
 
 class Style(LifecycleModelMixin, TimeStampedModel):
@@ -32,7 +30,7 @@ class Style(LifecycleModelMixin, TimeStampedModel):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL
     )
-    # resources = models.ManyToManyField(to="resource.Resource", on_delete=models.CASCADE)
+    resources = models.ManyToManyField(to=Resource)
 
     class Meta:
         verbose_name = "style"
@@ -87,6 +85,7 @@ class Series(LifecycleModelMixin, TimeStampedModel):
     )
     style = models.ForeignKey("Style", on_delete=models.CASCADE)
     description = models.TextField(verbose_name="Description", blank=True)
+    resources = models.ManyToManyField(to=Resource)
     VISIBILITY_CHOICES = (
         ("public", "Show to public"),
         ("private", "Do not show to public"),
@@ -97,7 +96,6 @@ class Series(LifecycleModelMixin, TimeStampedModel):
         default="private",
         help_text="Control whether guests can see this series.",
     )
-    # take_role = models.BooleanField("Should the leader take the role", default=False)
     MEMBERSHIP_CHOICES = (
         ("open", "Open to all"),
         ("invite", "Leader must approve request to join"),
@@ -123,6 +121,12 @@ class Series(LifecycleModelMixin, TimeStampedModel):
         through="SeriesMembers",
         related_name="members",
         through_fields=("series", "member"),
+    )
+    # Tags used by the leaders to describe the series for prospects
+    tags = TaggableManager(
+        "Tags to be searched to find your series",
+        blank=True,
+        help_text="Enter single word or 'quoted strings' to be used to find your series.",
     )
 
     class Meta:
@@ -177,7 +181,7 @@ class Meeting(LifecycleModelMixin, TimeStampedModel):
     )
 
     def __str__(self):
-        return f"{self.meeting.series.title} on {self.meeting.day:%m/%d/%Y} leader:{self.leader.name}"
+        return f"{self.series.title} on {self.day:%m/%d/%Y} leader:{self.leader.name}"
 
     class Meta:
         verbose_name = "meeting"

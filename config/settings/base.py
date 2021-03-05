@@ -64,6 +64,8 @@ DJANGO_APPS = [
     "django.forms",
     "phone_field",
     "django_google_maps",
+    "taggit",
+    "taggit_templatetags2",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -76,6 +78,7 @@ LOCAL_APPS = [
     "dfwtaichi.users.apps.UsersConfig",
     "dfwtaichi.styles.apps.StylesConfig",
     "dfwtaichi.locations.apps.LocationsConfig",
+    "dfwtaichi.resources.apps.ResourcesConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -272,4 +275,6 @@ SOCIALACCOUNT_ADAPTER = "dfwtaichi.users.adapters.SocialAccountAdapter"
 # Your stuff...
 GOOGLE_MAPS_API_KEY = "AIzaSyBLDpTM3c50sCj3Pw4Yo7Giju-adzTBbbE"
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
+# Tags
+TAGGIT_CASE_INSENSITIVE = True
 # ------------------------------------------------------------------------------
