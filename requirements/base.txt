@@ -1,21 +1,99 @@
-pytz==2020.4  # https://github.com/stub42/pytz
-python-slugify==4.0.1  # https://github.com/un33k/python-slugify
-Pillow==8.0.1  # https://github.com/python-pillow/Pillow
-argon2-cffi==20.1.0  # https://github.com/hynek/argon2_cffi
-redis==3.5.3  # https://github.com/andymccurdy/redis-py
-hiredis==1.1.0  # https://github.com/redis/hiredis-py
-
-# Django
-# ------------------------------------------------------------------------------
-django==3.0.11  # pyup: < 3.1  # https://www.djangoproject.com/
-django-environ==0.4.5  # https://github.com/joke2k/django-environ
-django-model-utils==4.0.0  # https://github.com/jazzband/django-model-utils
-django-allauth==0.43.0  # https://github.com/pennersr/django-allauth
-django-crispy-forms==1.9.2  # https://github.com/django-crispy-forms/django-crispy-forms
-django-redis==4.12.1  # https://github.com/jazzband/django-redis
-
-django-lifecycle==0.8.0 # https://github.com/rsinger86/django-lifecycle
-django-phone-field==1.8.1
+alabaster==0.7.12
+appdirs==1.4.4
+argon2-cffi==20.1.0
+asgiref==3.3.1
+astroid==2.5.1
+attrs==20.3.0
+Babel==2.9.0
+backcall==0.2.0
+certifi==2020.12.5
+cffi==1.14.5
+cfgv==3.2.0
+chardet==4.0.0
+click==7.1.2
+cryptography==3.4.6
+decorator==4.4.2
+defusedxml==0.7.0
+distlib==0.3.1
+Django==3.0.11
+django-allauth==0.43.0
+django-classy-tags==2.0.0
+django-crispy-forms==1.9.2
+django-environ==0.4.5
 django-google-maps==0.12.2
+django-lifecycle==0.8.0
+django-model-utils==4.0.0
+django-phone-field==1.8.1
+django-redis==4.12.1
 django-taggit==1.3.0
 django-taggit-templatetags2==1.6.1
+docutils==0.16
+Faker==6.5.0
+filelock==3.0.12
+hiredis==1.1.0
+identify==2.1.0
+idna==2.10
+imagesize==1.2.0
+iniconfig==1.1.1
+ipython==7.21.0
+ipython-genutils==0.2.0
+isort==5.7.0
+jedi==0.18.0
+Jinja2==2.11.3
+lazy-object-proxy==1.5.2
+livereload==2.6.3
+MarkupSafe==1.1.1
+mccabe==0.6.1
+mypy-extensions==0.4.3
+nodeenv==1.5.0
+oauthlib==3.1.0
+packaging==20.9
+parso==0.8.1
+pathspec==0.8.1
+pexpect==4.8.0
+pickleshare==0.7.5
+Pillow==8.0.1
+#pkg-resources==0.0.0
+pluggy==0.13.1
+prompt-toolkit==3.0.16
+ptyprocess==0.7.0
+py==1.10.0
+pycodestyle==2.6.0
+pycparser==2.20
+pyflakes==2.2.0
+Pygments==2.8.0
+PyJWT==2.0.1
+pylint==2.7.2
+pylint-plugin-utils==0.6
+pyparsing==2.4.7
+python-dateutil==2.8.1
+python-slugify==4.0.1
+python3-openid==3.2.0
+pytz==2020.4
+PyYAML==5.4.1
+redis==3.5.3
+regex==2020.11.13
+requests==2.25.1
+requests-oauthlib==1.3.0
+six==1.15.0
+snowballstemmer==2.1.0
+sphinxcontrib-applehelp==1.0.2
+sphinxcontrib-devhelp==1.0.2
+sphinxcontrib-htmlhelp==1.0.3
+sphinxcontrib-jsmath==1.0.1
+sphinxcontrib-qthelp==1.0.3
+sphinxcontrib-serializinghtml==1.1.4
+sqlparse==0.4.1
+termcolor==1.1.0
+testfixtures==6.17.1
+text-unidecode==1.3
+toml==0.10.2
+tornado==6.1
+traitlets==5.0.5
+typed-ast==1.4.2
+typing-extensions==3.7.4.3
+urllib3==1.26.3
+urlman==1.4.0
+virtualenv==20.4.2
+wcwidth==0.2.5
+wrapt==1.12.1

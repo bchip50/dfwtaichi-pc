@@ -26,7 +26,7 @@ class Style(LifecycleModelMixin, TimeStampedModel):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL
     )
-    resources = models.ManyToManyField(to=Resource)
+    resources = models.ManyToManyField(to=Resource, blank=True)
 
     class Meta:
         verbose_name = "style"
@@ -52,6 +52,10 @@ class SeriesLeaders(models.Model):
     active = models.BooleanField(default=True)
     since = models.DateField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = "leader"
+        verbose_name_plural = "leaders"
+
     def __str__(self) -> str:
         return f"{self.series.title}:{self.leader.name}"
 
@@ -63,6 +67,10 @@ class SeriesMembers(models.Model):
     last_meeting = models.DateField("Last meeting attended", null=True)
     paid_through = models.DateField("Paid up through", null=True)
     since = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "member"
+        verbose_name_plural = "members"
 
     def __str__(self) -> str:
         return f"{self.series.title}:{self.member.name}"
@@ -144,6 +152,10 @@ class MeetingAttendees(models.Model):
     meeting = models.ForeignKey(to="Meeting", on_delete=models.CASCADE)
     present = models.BooleanField(default=True)
 
+    class Meta:
+        verbose_name = "attendee"
+        verbose_name_plural = "attendees"
+
     def __str__(self) -> str:
         return f"{self.meeting.series.title} on {self.meeting.day:%m/%d/%Y}, {self.member.name}"
 
@@ -159,9 +171,9 @@ class Meeting(LifecycleModelMixin, TimeStampedModel):
         help_text="Building where the meeting is held. Leave empty for virtual meetings.",
     )
     room = models.TextField("Directions to meeting room or virtual link", blank=True)
-    day = models.DateField("Date of meeting")
-    start = models.TimeField("Start time of the meeting")
-    length = models.IntegerField("Minutes that the meeting lasts")
+    day = models.DateField("Date of meeting", blank=True)
+    start = models.TimeField("Start time of the meeting", blank=True)
+    length = models.IntegerField("Minutes that the meeting lasts", blank=True)
     message = models.TextField(
         "Notes to be included in email / text reminders", default=""
     )

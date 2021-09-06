@@ -5,21 +5,29 @@
 
 {% block content %}
 <div class="container">
-
-  <div class="row">
-    <div class="col-sm-12">
-
-      <h2>{{ object.title }}</h2>
-      {% if object.description %}
-        <p>{{ object.description }}</p>
-      {% endif %}
-      {% if object.wikipedia %}
-        <a href="{{object.wikipedia}}" target="_blank" rel="noopener noreferrer">Reference Page</a>
-      {% endif %}
-      {% if object.owner %}
-        <p>Owner: {{ object.owner.name }}</p>
-      {% endif %}
-    </div>
+  <div class="col-sm-12">
+    <h2>{{ object.title }}</h2>
+    {% if object.description %}
+      <p>{{ object.description }}</p>
+    {% endif %}
+    {% if object.wikipedia %}
+      <p>
+        See the <a href="{{object.wikipedia}}" target="_blank" rel="noopener noreferrer">Reference Page </a>
+      for more information.
+      </p>
+    {% endif %}
+    {% if object.owner.email %}
+      <p>Owner: {{ object.owner.name }} (Email:{{ object.owner.email }})</p>
+    {% endif %}
+    {% if object.resources %}
+      <p>Resources:</p>
+      <ul>
+        {% for res in object.resources.all %}
+          <li>{{ res.link_type }}: <a href="{{ res.link }}" target="_blank" rel="noopener noreferrer">
+            {{ res.title }}</a></li>
+       {% endfor %}
+      </ul>
+    {% endif %}
   </div>
 </div>
 <!-- End Action buttons -->
