@@ -1,3 +1,6 @@
+import uuid
+from pathlib import Path
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
@@ -6,6 +9,11 @@ from phone_field import PhoneField
 
 from dfwtaichi.resources.models import Resource
 from dfwtaichi.styles.models import Style
+
+
+def profile_pic_path(instance, filename):
+    path = Path(filename)
+    return f"profile_pics/{uuid.uuid4()}{path.suffix}"
 
 
 class User(AbstractUser):
@@ -24,6 +32,7 @@ class User(AbstractUser):
         "cell phone", blank=True, help_text="Number used for text notifications"
     )
     bio = models.TextField("TaiChi biography.", blank=True)
+    biophoto = models.ImageField(upload_to=profile_pic_path, blank=True, default="")
     resources = models.ManyToManyField(to=Resource)
     favorite_style = models.ForeignKey(
         to=Style,
