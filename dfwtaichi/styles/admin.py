@@ -48,12 +48,28 @@ class SeriesMembersChangeList:
 """
 
 
+class SeriesInLine(admin.TabularInline):
+    model = Series
+    min_num = 0
+
+
 @admin.register(Style)
 class StylesAdmin(admin.ModelAdmin):
     list_display = [
         "title",
         "slug",
     ]
+    inlines = [SeriesInLine]
+
+
+class SeriesLeadersInLine(admin.TabularInline):
+    model = Series.leaders.through
+    min_num = 0
+
+
+class SeriesMembersInLine(admin.TabularInline):
+    model = Series.members.through
+    min_num = 0
 
 
 @admin.register(Series)
@@ -63,6 +79,7 @@ class SeriesAdmin(admin.ModelAdmin):
         "title",
         "slug",
     ]
+    inlines = [SeriesLeadersInLine, SeriesMembersInLine]
 
 
 @admin.register(Meeting)

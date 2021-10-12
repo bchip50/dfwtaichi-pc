@@ -19,6 +19,16 @@
     {% if object.owner.email %}
       <p>Owner: {{ object.owner.name }} (Email:{{ object.owner.email }})</p>
     {% endif %}
+    {% if object.active_series.all %}
+      <p>Series:</p>
+      <ul>
+        {% for ser in object.series__set.all %}
+          <li class="col-sm-9"><a href="{% url 'styles:series-detail' %}" >
+            {{ ser.title }}</a></li>
+          <li class="col-sm-3">{{ ser.membership }}</li>
+       {% endfor %}
+      </ul>
+    {% endif %}
     {% if object.resources %}
       <p>Resources:</p>
       <ul>

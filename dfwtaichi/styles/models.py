@@ -36,7 +36,7 @@ class Style(LifecycleModelMixin, TimeStampedModel):
         return self.title
 
     def get_absolute_url(self) -> str:
-        return reverse("styles.views.detail", kwargs={"slug": self.slug})
+        return reverse("Styles:detail", kwargs={"slug": self.slug})
 
     @hook(BEFORE_SAVE, when="title", has_changed=True)
     def build_slug(self):
@@ -55,6 +55,7 @@ class SeriesLeaders(models.Model):
     class Meta:
         verbose_name = "leader"
         verbose_name_plural = "leaders"
+        ordering = ["primary"]
 
     def __str__(self) -> str:
         return f"{self.series.title}:{self.leader.name}"
@@ -64,13 +65,14 @@ class SeriesMembers(models.Model):
     member = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     series = models.ForeignKey(to="Series", on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
-    last_meeting = models.DateField("Last meeting attended", null=True)
-    paid_through = models.DateField("Paid up through", null=True)
+    last_meeting = models.DateField("Last meeting attended", null=True, blank=True)
+    paid_through = models.DateField("Paid up through", null=True, blank=True)
     since = models.DateField(auto_now_add=True)
 
     class Meta:
         verbose_name = "member"
         verbose_name_plural = "members"
+        ordering = ["active"]
 
     def __str__(self) -> str:
         return f"{self.series.title}:{self.member.name}"
@@ -89,7 +91,7 @@ class Series(LifecycleModelMixin, TimeStampedModel):
     )
     style = models.ForeignKey("Style", on_delete=models.CASCADE)
     description = models.TextField(verbose_name="Description", blank=True)
-    resources = models.ManyToManyField(to=Resource)
+    resources = models.ManyToManyField(to=Resource, blank=True)
     VISIBILITY_CHOICES = (
         ("public", "Show to public"),
         ("private", "Do not show to public"),
@@ -117,6 +119,8 @@ class Series(LifecycleModelMixin, TimeStampedModel):
         through="SeriesLeaders",
         related_name="leaders",
         through_fields=("series", "leader"),
+        editable=True,
+        blank=True,
     )
     take_roll = models.BooleanField("Allow leader to take roll", default=False)
     members = models.ManyToManyField(
@@ -125,6 +129,8 @@ class Series(LifecycleModelMixin, TimeStampedModel):
         through="SeriesMembers",
         related_name="members",
         through_fields=("series", "member"),
+        editable=True,
+        blank=True,
     )
     # Tags used by the leaders to describe the series for prospects
     tags = TaggableManager(
@@ -136,6 +142,8 @@ class Series(LifecycleModelMixin, TimeStampedModel):
     class Meta:
         verbose_name = "series"
         verbose_name_plural = "series"
+        indexes = [models.Index(fields=["style", "title"])]
+        ordering = ["-visibility"]
 
     def __str__(self) -> str:
         return f"{self.style.title}: {self.title}"
@@ -171,7 +179,7 @@ class Meeting(LifecycleModelMixin, TimeStampedModel):
         help_text="Building where the meeting is held. Leave empty for virtual meetings.",
     )
     room = models.TextField("Directions to meeting room or virtual link", blank=True)
-    day = models.DateField("Date of meeting", blank=True)
+    day = models.DateField("Date of last meeting", blank=True)
     start = models.TimeField("Start time of the meeting", blank=True)
     length = models.IntegerField("Minutes that the meeting lasts", blank=True)
     message = models.TextField(
@@ -194,3 +202,5 @@ class Meeting(LifecycleModelMixin, TimeStampedModel):
     class Meta:
         verbose_name = "meeting"
         verbose_name_plural = "meetings"
+        get_latest_by = "day"
+        ordering = ["-day"]
