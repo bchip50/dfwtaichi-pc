@@ -22,7 +22,7 @@
     {% if object.leaders %}
       <p>Leaders or Instructors:</p>
       <ul>
-        {% for ldr in object.active_leaders.all %}
+        {% for ldr in object.leaders.all %}
           <li>
             <span col-sm-3>{{ ldr.name}}</span>
             <span col-sm-6>{{ ldr.email}}</span>
@@ -34,7 +34,7 @@
     {% if object.members %}
       <p>Members:</p>
       <ul>
-        {% for mbr in object.members %}
+        {% for mbr in object.members.all %}
           <li>
             <span col-sm-3>{{ mbr.name}}</span>
             <span col-sm-6>{{ mbr.email}}</span>

@@ -35,6 +35,9 @@ class Style(LifecycleModelMixin, TimeStampedModel):
     def __str__(self) -> str:
         return self.title
 
+    def get_series(self):
+        return self.seriesStyle.all()
+
     def get_absolute_url(self) -> str:
         return reverse("Styles:detail", kwargs={"slug": self.slug})
 
@@ -89,7 +92,9 @@ class Series(LifecycleModelMixin, TimeStampedModel):
     slug = models.SlugField(
         verbose_name="Series address", unique=True, default="Auto-generated"
     )
-    style = models.ForeignKey("Style", on_delete=models.CASCADE)
+    style = models.ForeignKey(
+        Style, on_delete=models.CASCADE, related_name="seriesStyle"
+    )
     description = models.TextField(verbose_name="Description", blank=True)
     resources = models.ManyToManyField(to=Resource, blank=True)
     VISIBILITY_CHOICES = (

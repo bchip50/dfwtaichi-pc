@@ -14,8 +14,7 @@ style_list_view = StyleListView.as_view()
 class ActiveSeriesMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        active_series = Style.series_set
-        context["active_series"] = active_series
+        context["series"] = self.seriesStyle.all()
         return context
 
 
@@ -29,7 +28,7 @@ style_detail_view = StyleDetailView.as_view()
 class ActiveLeadersMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        active_leaders = Series.objects.get(active__eq=True)
+        active_leaders = Series.leaders.getrunfilter(active__eq=True)
         context["active_leaders"] = active_leaders
         return context
 
